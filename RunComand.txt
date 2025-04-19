@@ -1,0 +1,3 @@
+docker run -it --rm --env-file .env -v "C:\Users\KING\Desktop\devsu-demo-devops-python:/app" -p 8000:8000 devsu-demo-devops-python
+
+-v "C:\...\:/app"	Monta un volumen: el directorio de tu proyecto en Windows (host) se monta como /app dentro del contenedor. Esto permite que el contenedor use tu código y persista db.sqlite3 y otros archivos
