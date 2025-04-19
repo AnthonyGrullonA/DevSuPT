@@ -1,6 +1,68 @@
-*.log
-*.pot
-*.pyc
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
 
-db.sqlite3
+# Entorno virtual
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Archivos de entorno
+.env
+.env.*
+
+# Archivos de configuración local
+*.local
+*.config
+*.settings
+
+# Archivos de logs
+*.log
+
+# Archivos de bases de datos temporales
+*.sqlite3
+
+# Archivos de pruebas
+.coverage
+*.cover
+htmlcov/
+nosetests.xml
+coverage.xml
+*.py,cover
+
+# Directorios de pruebas
+test_output/
+tests/__pycache__/
+
+# Archivos de build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# VSCode y otros editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos generados por PyInstaller
+*.spec
+
+# Static files (si se generan automáticamente)
+staticfiles/
+tmp/
+media/
+
+# Docker / CI
+*.pid
+celerybeat-schedule
+*.db
+*.sqlite3

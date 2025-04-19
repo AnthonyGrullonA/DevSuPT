@@ -13,7 +13,7 @@ class TestUserView(APITestCase):
     def test_post(self):
         response = self.client.post(self.url, self.data, format='json')
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(json.loads(response.content), {"id": 2, "name":"Test2", "dni":"09876543211"})
+        self.assertEqual(json.loads(response.content), {"id": 2, "name": "Test2", "dni": "09876543211"})
         self.assertEqual(User.objects.count(), 2)
 
     def test_get_list(self):
@@ -24,7 +24,7 @@ class TestUserView(APITestCase):
     def test_get(self):
         response = self.client.get(self.url + '1/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content), {"id": 1, "name":"Test1", "dni":"09876543210"})
+        self.assertEqual(json.loads(response.content), {"id": 1, "name": "Test1", "dni": "09876543210"})
 
     def test_post_duplicate_user(self):
         duplicate_data = {'name': 'TestX', 'dni': '09876543210'}
@@ -38,9 +38,10 @@ class TestUserView(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('dni', response.data)
 
-    def test_delete_user_not_allowed(self):
+    def test_delete_user(self):
         response = self.client.delete(self.url + '1/')
-        self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(User.objects.count(), 0)
 
     def test_get_nonexistent_user(self):
         response = self.client.get(self.url + '999/')
