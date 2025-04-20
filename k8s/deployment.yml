@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-python-deployment
+  labels:
+    app: demo-python
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-python
+  template:
+    metadata:
+      labels:
+        app: demo-python
+    spec:
+      containers:
+        - name: demo-python
+          image: k1ng231515/devsu-demo-devops-python:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: demo-secrets
+                  key: DJANGO_SECRET_KEY
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
+                  key: DATABASE_NAME
+          volumeMounts:
+            - name: sqlite-storage
+              mountPath: /app/db
+      volumes:
+        - name: sqlite-storage
+          persistentVolumeClaim:
+            claimName: sqlite-pvc
+      restartPolicy: Always

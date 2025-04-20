@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-python-service
+  labels:
+    app: demo-python
+spec:
+  selector:
+    app: demo-python
+  ports:
+    - protocol: TCP
+      port: 80           # Puerto por el que se expone el servicio internamente
+      targetPort: 8000   # Puerto donde corre la aplicación dentro del contenedor
+  type: ClusterIP
