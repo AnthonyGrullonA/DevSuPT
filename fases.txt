@@ -1,0 +1,64 @@
+DevOps Prueba Técnica - demo-devops-python
+
+FASE 1: Preparación del Proyecto
+- Clonar el repositorio desde Bitbucket
+- Validar instalación de Python 3.11.3
+- Crear entorno virtual y activar
+- Instalar dependencias con pip install -r requirements.txt
+- Ejecutar makemigrations y migrate
+- Ejecutar la app localmente con py manage.py runserver
+- Probar endpoints en http://localhost:8000/api/users/
+- Crear repositorio público en GitHub para la solución DevOps
+
+FASE 2: Dockerización de la Aplicación (Django)
+- Crear Dockerfile con:
+  - Imagen base python:3.11-slim
+  - Variables de entorno
+  - Usuario no root
+  - Expone el puerto 8000
+  - HEALTHCHECK al endpoint /api/
+- Crear archivo .dockerignore con:
+  - __pycache__, *.pyc, *.sqlite3, db.sqlite3, .env
+- Probar docker build y docker run
+- Validar funcionamiento en localhost:8000 desde contenedor
+
+FASE 3: CI/CD Pipeline (GitHub Actions)
+- Crear archivo .github/workflows/pipeline.yml
+- Agregar pasos de pipeline:
+  - Checkout del código
+  - Instalación de Python 3.11
+  - Instalación de dependencias
+  - Ejecutar migraciones con makemigrations y migrate
+  - Ejecutar tests unitarios con py manage.py test
+  - Análisis estático con pylint
+  - Build de imagen Docker
+  - Push a GHCR o DockerHub
+  - (Opcional) Escaneo de vulnerabilidades con Trivy
+
+FASE 4: Despliegue Kubernetes
+- Crear deployment.yaml con 2 réplicas y contenedor expuesto en 8000
+- Crear service.yaml tipo ClusterIP
+- Crear configmap.yaml si es necesario
+- Crear secrets.yaml si se usan credenciales
+- Crear ingress.yaml (opcional) para acceso externo
+- Crear hpa.yaml (opcional) para escalado automático
+- Levantar clúster local con minikube o kind
+- Aplicar los manifiestos con kubectl apply -f .
+- Validar acceso al endpoint en el cluster
+
+FASE 5: Integración del Despliegue al Pipeline
+- Agregar paso en el pipeline para aplicar manifiestos K8s con kubectl
+- Usar kind o minikube dentro del job CI (simulado)
+- (Opcional) Exponer servicio con ngrok o localtunnel para pruebas externas
+
+FASE 6: Documentación
+- Completar README.md con:
+  - Descripción del proyecto Django y endpoints disponibles
+  - Instrucciones para ejecución local
+  - Instrucciones para construir imagen Docker
+  - Despliegue en Kubernetes
+  - Descripción del pipeline de CI/CD
+  - Capturas del sistema funcionando
+  - Capturas o links del pipeline en ejecución
+- Crear diagrama de arquitectura (Docker + K8s)
+- Crear diagrama de flujo CI/CD (GitHub Actions)
